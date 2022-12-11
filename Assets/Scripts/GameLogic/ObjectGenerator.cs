@@ -14,8 +14,8 @@ public class ObjectGenerator : MonoBehaviour
     [SerializeField] private Vector2 JumpVector;
     [Range(0, 1)] [SerializeField] private float JumpChance;
     [SerializeField] private float JumpForce;
-     [SerializeField] private int OrderPosition;
-     [SerializeField] private Transform GarbageTransform;
+    [SerializeField] private int OrderPosition;
+    [SerializeField] private Transform GarbageTransform;
 
     private void OnEnable()
     {
@@ -25,7 +25,7 @@ public class ObjectGenerator : MonoBehaviour
 
     public IEnumerator Spawn()
     {
-        yield return new WaitForSeconds((1.3f / GenerationSpeed) *OrderPosition);
+        yield return new WaitForSeconds((1.3f / GenerationSpeed) * OrderPosition);
         while (true)
         {
             GenerateObject(Random.value < FoodToEnemySpawnRate ? FoodObject : EnemyObject);
@@ -35,7 +35,7 @@ public class ObjectGenerator : MonoBehaviour
 
     public void GenerateObject(PushableObject gameObject)
     {
-        var obj = Instantiate(gameObject, SpawnPoint.position, Quaternion.identity);
+        var obj = Instantiate(gameObject, SpawnPoint.position, Quaternion.identity, GarbageTransform);
         if (Random.value < JumpChance)
         {
             obj.Rigidbody2D.AddForce(JumpVector.normalized * JumpForce);

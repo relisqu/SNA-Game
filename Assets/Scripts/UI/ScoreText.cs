@@ -23,8 +23,9 @@ public class ScoreText : MonoBehaviour
 
     private void SaveScore()
     {
-        PlayerData.CurrentScore = _score;
-        PlayerData.UpdateMaxScore();
+        Database.Instance.PlayerData.CurrentScore = _score;
+        Database.Instance.PlayerData.UpdateMaxScore();
+        Database.Instance.SendPlayerProfileToServer();
     }
 
     private void OnEnable()

@@ -6,12 +6,11 @@ using UnityEngine.Networking;
 
 public class PlayerData
 {
-    public static string CurrentName;
-    public static int CurrentScore;
-    public static int CurrentMaxScore;
-    public static bool IsNew;
+    public string CurrentName;
+    public int CurrentScore;
+    public int CurrentMaxScore;
 
-    public static void UpdateMaxScore()
+    public void UpdateMaxScore()
     {
         if (CurrentMaxScore < CurrentScore)
         {
@@ -20,7 +19,13 @@ public class PlayerData
     }
 
 
-    public static void GetMaxScoreFromTable()
+    public string Stringify() 
     {
+        return JsonUtility.ToJson(this);
+    }
+
+    public static PlayerData Parse(string json)
+    {
+        return JsonUtility.FromJson<PlayerData>(json);
     }
 }

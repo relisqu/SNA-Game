@@ -8,9 +8,6 @@ public class GameChangeState : MonoBehaviour
         [SerializeField] private GameObject HomeCanvas;
         [SerializeField] private GameObject Level;
         [SerializeField] private Transform GarbageTransform;
-        public PlayerData PlayerData;
-        
-        
         
         
         
@@ -22,7 +19,6 @@ public class GameChangeState : MonoBehaviour
                 Level.SetActive(true);
                 Health.Instance.Died += LoadScoreScene;
                 Level.SetActive(false);
-                PlayerData = new PlayerData();
         }
 
         public void LoadScoreScene()
@@ -31,14 +27,11 @@ public class GameChangeState : MonoBehaviour
                 HomeCanvas.SetActive(false);
                 LoseCanvas.SetActive(true);
                 ClearGarbage();
+                Database.Instance.SendPlayerProfileToServer();
         }
 
         private void ClearGarbage()
         {
-                foreach (Transform garbage in GarbageTransform)
-                {
-                        Destroy(garbage.gameObject);
-                }
                 GarbageTransform.gameObject.SetActive(false);
         }
 

@@ -15,7 +15,7 @@ namespace DefaultNamespace
 
         private void LateUpdate()
         {
-            _tmpText.SetText("Your score: {0}", PlayerData.CurrentScore);
+            _tmpText.SetText("Your score: {0}", Database.Instance.PlayerData.CurrentScore);
         }
         
     }

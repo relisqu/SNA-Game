@@ -17,13 +17,9 @@ namespace DefaultNamespace
             }
         }
 
-        private void OnEnable()
+        private void OnDisable()
         {
-            Health.Instance.Died += () =>
-            {
-                if (gameObject != null)
-                    Destroy(gameObject);
-            };
+            Destroy(gameObject);
         }
 
         public void Collect()

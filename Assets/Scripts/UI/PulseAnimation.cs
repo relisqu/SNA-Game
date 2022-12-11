@@ -1,5 +1,7 @@
 using System;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using UnityEngine;
 
 public class PulseAnimation : MonoBehaviour
@@ -8,10 +10,15 @@ public class PulseAnimation : MonoBehaviour
     public Vector3 Rotation;
 
     public float Speed;
+    Tweener _scaleCore;
+    Tweener _rotateCore;
     private void OnEnable()
     {
-        DOTween.KillAll(transform);
-        transform.DOScale(Scale, Speed).SetSpeedBased().SetLoops(-1, LoopType.Yoyo);
-        transform.DOPunchRotation(Rotation, Speed,0).SetSpeedBased().SetLoops(-1, LoopType.Yoyo);
+        _scaleCore?.Kill();
+        _rotateCore?.Kill();
+        _scaleCore = transform.DOScale(Scale, Speed).SetSpeedBased().SetLoops(-1, LoopType.Yoyo);
+        _rotateCore = transform.DOPunchRotation(Rotation, Speed,0).SetSpeedBased().SetLoops(-1, LoopType.Yoyo);
     }
+    
+    
 }
